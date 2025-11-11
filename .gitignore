@@ -1,0 +1,12 @@
+# files and folders
+__pycache__/
+*.pyc
+dist/
+build/
+venv/
+.env
+
+# Executables
+*.exe
+*.log
+*.apk
