@@ -18,6 +18,9 @@ Debugging:
     debug = True
     console = True
     )
+Shortcuts in Slow-Mode:
+    Enter: Rename current file
+    Escape: Skip current file
 
 Future Features:
 (maybe: Add support for custom date format)
@@ -644,6 +647,19 @@ class PhotoRenamerApp:
             lambda e: self._confirm_rename(
                 dialog, file_path, new_entry.get()
             )
+        )
+        new_entry.bind(
+            "<Escape>",
+            lambda e: self._skip_file(dialog)
+        )
+        new_entry.bind(
+            "<BackSpace>",
+            lambda e: self._undo_last(dialog) if self.rename_history else None
+        )
+        # Also bind to dialog itself (when entry not focused)
+        dialog.bind(
+            "<Escape>",
+            lambda e: self._skip_file(dialog)
         )
         dialog.protocol(
             "WM_DELETE_WINDOW", 
