@@ -43,31 +43,6 @@ from PIL.Image import Exif
 from PIL.ExifTags import TAGS
 import psutil
 
-
-
-# Redirect all errors to file
-ERROR_LOG = "photo_renamer_errors.log"
-
-def log_error(msg): # type: ignore
-    """Log error to file."""
-    with open(ERROR_LOG, 'a', encoding='utf-8') as f:
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        f.write(f"[{timestamp}] {msg}\n")
-
-# Catch all uncaught exceptions
-def exception_handler(exc_type, exc_value, exc_traceback): # type: ignore
-    error_msg = ''.join(traceback.format_exception(
-        exc_type, exc_value, exc_traceback # type: ignore
-    ))
-    log_error(f"UNCAUGHT EXCEPTION:\n{error_msg}")
-    
-    # Keep console open
-    input("ERROR OCCURRED! Press Enter to exit...")
-    sys.exit(1)
-
-sys.excepthook = exception_handler
-
-
 # ================== THEME CONFIGURATION ==================
 
 THEMES = {
@@ -380,7 +355,7 @@ class PhotoRenamerApp:
         self.apply_theme()
         self._update_all_widgets(self.root)  # type: ignore
     
-    def _update_all_widgets(self, widget: tk.Widget):
+    def _update_all_widgets(self, widget : tk.Widget| tk.Toplevel):
         """Recursively update colors for all widgets."""
         try:
             # Update based on widget type
@@ -607,7 +582,7 @@ class PhotoRenamerApp:
             os.startfile(str(file_path))
             
             # Position media viewer after it opens
-            self.root.after(600, self._position_media_window)
+            self.root.after(650, self._position_media_window)
         except Exception as e:
             self.log(f"Fehler beim Öffnen: {str(e)}")
         
@@ -974,7 +949,6 @@ class PhotoRenamerApp:
         try:
             self.root.mainloop()
         except Exception as e:
-            log_error(f"MAINLOOP EXCEPTION: {e}\n{traceback.format_exc()}")
             messagebox.showerror("Fatal Error", str(e))
             input("Press Enter to exit...")
 
