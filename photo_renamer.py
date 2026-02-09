@@ -13,6 +13,11 @@ Slow Mode: Shows each file with rename dialog for manual control
 package guide:
     im richtigem ordner + mit pip install -r requirements.txt installieren
     pyinstaller PhotoRenamer.spec
+Debugging:
+    in PhotoRenamer.spec exe = EXE(
+    debug = True
+    console = True
+    )
 
 Future Features:
 (maybe: Add support for custom date format)

@@ -39,13 +39,13 @@ exe = EXE(
     a.datas,
     [],
     name='PhotoRenamer',
-    debug=True,  # WICHTIG: Für Debugging
+    debug=False,                         # WICHTIG: Für Debugging
     bootloader_ignore_signals=False,
     strip=False,
     upx=False,  # UPX manchmal problematisch
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=True,  # WICHTIG: Console an für Fehler
+    console=False,                       # WICHTIG: Console an für Fehler
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
