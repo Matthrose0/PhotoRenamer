@@ -1,12 +1,19 @@
-# files and folders
+# Python
 __pycache__/
 *.pyc
-dist/
-build/
 venv/
 .env
-
-# Executables
+ 
+# Build output
+build/
+dist/
+ 
+# Executables, logs
 *.exe
 *.log
-*.apk
+ 
+# IDE / OS
+.idea/
+.vscode/
+Thumbs.db
+ 

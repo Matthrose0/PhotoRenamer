@@ -1,6 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-
-block_cipher = None
+# Build: pyinstaller PhotoRenamer.spec
 
 a = Analysis(
     ['photo_renamer.py'],
@@ -9,12 +8,10 @@ a = Analysis(
     datas=[],
     hiddenimports=[
         'PIL._tkinter_finder',
-        'PIL.Image',
-        'PIL.ExifTags',
         'win32com',
         'win32com.client',
         'win32gui',
-        'win32con',
+        'win32process',
         'pywintypes',
         'pythoncom',
         'psutil',
@@ -23,29 +20,25 @@ a = Analysis(
     hooksconfig={},
     runtime_hooks=[],
     excludes=[],
-    win_no_prefer_redirects=False,
-    win_private_assemblies=False,
-    cipher=block_cipher,
     noarchive=False,
 )
 
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+pyz = PYZ(a.pure)
 
 exe = EXE(
     pyz,
     a.scripts,
     a.binaries,
-    a.zipfiles,
     a.datas,
     [],
     name='PhotoRenamer',
-    debug=False,                         # WICHTIG: Für Debugging
+    icon='icon.ico',
+    debug=False,    # fuer Fehlersuche auf True setzen
+    console=False,  # fuer Fehlersuche auf True setzen
     bootloader_ignore_signals=False,
     strip=False,
-    upx=False,  # UPX manchmal problematisch
-    upx_exclude=[],
+    upx=False,
     runtime_tmpdir=None,
-    console=False,                       # WICHTIG: Console an für Fehler
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
