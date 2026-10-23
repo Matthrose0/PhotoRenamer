@@ -222,6 +222,7 @@ class PhotoRenamerApp:
         self.root = tk.Tk()
         self.root.title("Photo Renamer")
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+        self.root.report_callback_exception = self.handle_exception
         
         # Application state
         self.theme = "light"
@@ -490,12 +491,15 @@ class PhotoRenamerApp:
         return True
     
     def _get_unique_path(self, base_path: Path, stem: str, 
-                         suffix: str) -> Path:
-        """Generate unique filename by appending counter if needed."""
+                         suffix: str, current: Path | None = None) -> Path:
+        """Generate unique filename by appending counter if needed.
+        
+        'current' is the file being renamed; it does not count as a collision.
+        """
         new_path = base_path / (stem + suffix)
         counter = 1
         
-        while new_path.exists():
+        while new_path.exists() and new_path != current:
             new_path = base_path / f"{stem}_{counter}{suffix}"
             counter += 1
         
@@ -524,7 +528,8 @@ class PhotoRenamerApp:
                 old_name = file_path.name
                 new_stem = get_new_filename(file_path)
                 new_path = self._get_unique_path(
-                    file_path.parent, new_stem, file_path.suffix
+                    file_path.parent, new_stem, file_path.suffix,
+                    current=file_path
                 )
                 
                 file_path.rename(new_path)
@@ -771,7 +776,8 @@ class PhotoRenamerApp:
             new_path = self._get_unique_path(
                 file_path.parent,
                 Path(new_name).stem,
-                Path(new_name).suffix
+                Path(new_name).suffix,
+                current=file_path
             )
             
             old_name = file_path.name
@@ -971,7 +977,6 @@ class PhotoRenamerApp:
             self.root.mainloop()
         except Exception as e:
             messagebox.showerror("Fatal Error", str(e))
-            input("Press Enter to exit...")
 
 
 # ==================== MAIN ====================
