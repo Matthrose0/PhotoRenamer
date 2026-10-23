@@ -16,6 +16,9 @@ Kamera-, Handy- und Messenger-Dateien haben chaotische Namen. Mit einheitlichen 
 - Dark- und Light-Theme
 - Log-Fenster mit Protokoll aller Aktionen
 
+![Bild von UI: Modus und Verzeichnisauswahl](/docs/menu.jpeg)
+![Bild von Umbenennung](/docs/file_rename.jpeg)
+
 ## Eindeutige Dateinamen
 
 Gerätespezifische Namen wie `IMG_0001.jpg` kollidieren schnell, sobald Dateien von Handy, Kamera und Messenger in einem Ordner landen. PhotoRenamer benennt stattdessen nach dem **Zeitpunkt der Aufnahme** (auf die Sekunde genau). Jedes Foto bekommt damit einen Namen, der aus seinem Inhalt stammt und nicht vom Gerät, und die Dateien aller Geräte lassen sich ohne Überschneidungen zusammenführen.
